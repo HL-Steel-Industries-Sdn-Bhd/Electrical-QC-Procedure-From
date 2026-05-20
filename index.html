@@ -254,19 +254,21 @@
     .plug-pins-only {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-start;
       gap: 6px;
       position: relative;
     }
     .earth-row {
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       margin-bottom: 2px;
+      /* 整体向右偏移约12个字母宽度 */
+      padding-left: 7.2em;
     }
     .pin-row {
       display: flex;
       gap: 18px;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: flex-end;
     }
     .pin-item {
@@ -297,10 +299,6 @@
       gap: 5px;
       font-size: 12px;
       font-weight: 500;
-    }
-    /* E脚复选框专用偏移：约12个字母宽度 */
-    .earth-check-offset {
-      margin-left: 7.2em; /* 12个字母近似宽度，可根据实际微调 */
     }
 
     .signature-table {
@@ -446,17 +444,18 @@
             <td><label><input type="checkbox" class="pass-check"> </label></td>
             <td><label class="cross-label"><input type="checkbox" class="cross-checkbox"> </label></td>
           </tr>
-          <!-- g) 合并：E脚复选框向右偏移约12个字母距离 -->
+          <!-- g) 合并：E脚整行向右偏移约12个字母距离 -->
           <tr>
             <td colspan="3" class="merged-plug-cell">
               <div class="plug-g-title">g) Plug L&N Connection (When 3 Pin Facing You)</div>
               <div class="plug-diagram">
                 <div class="plug-pins-only">
+                  <!-- earth-row 整体通过 padding-left 向右移 -->
                   <div class="earth-row">
                     <div class="pin-item">
                       <div class="pin-box earth-pin-box"></div>
                       <span class="pin-label">E (Green/Yellow)</span>
-                      <label class="pin-check-item earth-check-offset"><input type="checkbox"></label>
+                      <label class="pin-check-item"><input type="checkbox"></label>
                     </div>
                   </div>
                   <div class="pin-row">
