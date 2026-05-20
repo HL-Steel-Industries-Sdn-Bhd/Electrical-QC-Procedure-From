@@ -298,6 +298,10 @@
       font-size: 12px;
       font-weight: 500;
     }
+    /* E脚复选框专用偏移：约12个字母宽度 */
+    .earth-check-offset {
+      margin-left: 7.2em; /* 12个字母近似宽度，可根据实际微调 */
+    }
 
     .signature-table {
       width: 100%;
@@ -442,7 +446,7 @@
             <td><label><input type="checkbox" class="pass-check"> </label></td>
             <td><label class="cross-label"><input type="checkbox" class="cross-checkbox"> </label></td>
           </tr>
-          <!-- g) 合并：L脚顺序为 文字(L Brown/Red) → 复选框 → 长方形 -->
+          <!-- g) 合并：E脚复选框向右偏移约12个字母距离 -->
           <tr>
             <td colspan="3" class="merged-plug-cell">
               <div class="plug-g-title">g) Plug L&N Connection (When 3 Pin Facing You)</div>
@@ -452,12 +456,11 @@
                     <div class="pin-item">
                       <div class="pin-box earth-pin-box"></div>
                       <span class="pin-label">E (Green/Yellow)</span>
-                      <label class="pin-check-item"><input type="checkbox"></label>
+                      <label class="pin-check-item earth-check-offset"><input type="checkbox"></label>
                     </div>
                   </div>
                   <div class="pin-row">
                     <div class="pin-item">
-                      <!-- L 脚：文字最左边，然后复选框，最后长方形 -->
                       <span class="pin-label">L (Brown/Red)</span>
                       <label class="pin-check-item"><input type="checkbox"></label>
                       <div class="pin-box live-neutral-box"></div>
