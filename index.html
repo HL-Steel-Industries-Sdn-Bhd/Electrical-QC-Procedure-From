@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Electrical Appliance QC Procedure & Form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=1.0">
+  <title>Electrical Appliance QC • 3-Pin Layout</title>
   <style>
     * {
       margin: 0;
@@ -95,39 +95,60 @@
       text-transform: uppercase;
     }
 
-    /* 信息表格 */
+    /* 信息表格 — 严格按1:6比例分配 */
     .info-table {
       width: 100%;
       border-collapse: collapse;
       margin: 4px 0;
       font-size: 13px;
       border: 1px solid #2c3e50;
+      table-layout: fixed; /* 关键：固定布局实现精确比例 */
     }
     .info-table td {
       border: 1px solid #2c3e50;
-      padding: 6px 8px;
+      padding: 6px 4px;
       vertical-align: middle;
       background: white;
+      word-break: break-word;
     }
     .info-label {
       font-weight: 700;
       white-space: nowrap;
-      width: 1%;
+      background: #f8fafc;
     }
+    /* 第一排：6列均分宽度，每列1/6。题目和答案自动为1:6 */
+    .info-table tr:first-child td {
+      width: 16.666%; /* 100%/6 ≈ 16.666% 正好六列各占一份 */
+    }
+    /* 第二排：4.题目 1/6, 4.答案 2/6, 5.题目 1/6, 5.答案 2/6 */
+    .info-table tr:last-child td:nth-child(1) {
+      width: 16.666%; /* 1/6 */
+    }
+    .info-table tr:last-child td:nth-child(2) {
+      width: 33.333%; /* 2/6 */
+    }
+    .info-table tr:last-child td:nth-child(3) {
+      width: 16.666%; /* 1/6 */
+    }
+    .info-table tr:last-child td:nth-child(4) {
+      width: 33.333%; /* 2/6 */
+    }
+
     .underline-input {
       display: inline-block;
       min-width: 70px;
       border-bottom: 1.5px solid #333;
       margin: 0 4px;
       height: 1.4em;
+      width: 100%;
     }
     .made-in-group {
       display: flex;
       align-items: center;
       gap: 10px;
+      flex-wrap: wrap;
     }
 
-    /* 类别区域 */
     .category-section {
       margin: 4px 0;
     }
@@ -168,7 +189,6 @@
       height: 1.2em;
     }
 
-    /* 主检查表格 */
     .checklist-table {
       width: 100%;
       border-collapse: collapse;
@@ -221,7 +241,6 @@
       font-weight: 600;
     }
 
-    /* d) 子项使用pass/fail栏 */
     .sub-item-row td {
       padding: 3px 6px;
       font-size: 12px;
@@ -230,69 +249,74 @@
       padding-left: 12px;
     }
 
-    /* 插头区域 - 黑白，横躺长方形L/N，站立E */
+    /* ---------- 3-PIN 图形布局：严格按描述排列 ---------- */
     .plug-diagram {
       display: flex;
       align-items: flex-start;
       justify-content: flex-start;
-      gap: 0;
-      padding: 4px 0;
+      padding: 4px 0 2px 0;
       margin-top: 2px;
     }
     .plug-pins-only {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 6px;
+      align-items: flex-start; /* 左对齐以便控制位置 */
+      gap: 10px;
       position: relative;
     }
+    /* 第一行：E (Green/Yellow) + checkbox 垂直居中 */
     .earth-row {
       display: flex;
-      justify-content: center;
-      margin-bottom: 2px;
+      align-items: center;
+      gap: 10px;
+      margin-left: 0;
     }
+    .earth-pin-box {
+      width: 12px;
+      height: 28px;
+      background: #ddd;
+      border: 1.5px solid #1a1a1a;
+      display: block;
+    }
+    /* 第二行：两个横长方形 + 各自checkbox，位置居中偏右模拟空格 */
     .pin-row {
       display: flex;
-      gap: 18px;
-      justify-content: center;
-      align-items: flex-end;
+      align-items: center;
+      gap: 28px; /* 左右间距，实现描述中的空格 */
+      margin-top: 6px;
+      margin-left: 0;
     }
     .pin-item {
       display: flex;
       align-items: center;
       gap: 8px;
     }
-    .pin-box {
-      background: #ddd;
-      border: 1.5px solid #1a1a1a;
-    }
-    .earth-pin-box {
-      width: 12px;
-      height: 28px;
-    }
     .live-neutral-box {
       width: 28px;
       height: 12px;
+      background: #ddd;
+      border: 1.5px solid #1a1a1a;
+      display: block;
     }
     .pin-label {
       font-size: 11px;
       font-weight: 700;
       color: black;
-    }
-    .check-pins {
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-      margin-left: 12px;
+      white-space: nowrap;
     }
     .pin-check-item {
       display: flex;
       align-items: center;
-      gap: 5px;
-      font-size: 12px;
-      font-weight: 500;
+    }
+    .pin-check-item input[type="checkbox"] {
+      width: 14px;
+      height: 14px;
+      margin: 0;
+      accent-color: #1e3b5a;
+      cursor: pointer;
     }
 
+    /* 签名 */
     .signature-table {
       width: 100%;
       border-collapse: collapse;
@@ -322,6 +346,15 @@
       margin-top: 6px;
       text-align: right;
     }
+
+    /* 辅助微调 */
+    .plug-spacer {
+      display: flex;
+      flex-direction: column;
+    }
+    .earth-check-wrapper {
+      margin-left: 4px;
+    }
   </style>
 </head>
 <body>
@@ -333,7 +366,8 @@
     <div class="page-content">
       <h1>Electrical Appliance QC Procedure & Form</h1>
       
-      <!-- 表格: 1,2,3 第一排；4,5 第二排 -->
+      <!-- 表格第一排：1.题目1:6 答案1:6 | 2.题目1:6 答案1:6 | 3.题目1:6 答案1:6 -->
+      <!-- 表格第二排：4.题目1:6 答案2:6 | 5.题目1:6 答案2:6 -->
       <table class="info-table">
         <tr>
           <td class="info-label">1. Made in HL?</td>
@@ -350,9 +384,9 @@
         </tr>
         <tr>
           <td class="info-label">4. Customer Name</td>
-          <td colspan="2"><span class="underline-input" style="min-width:180px;" contenteditable="true"></span></td>
+          <td colspan="1"><span class="underline-input" style="min-width:160px; width:100%;" contenteditable="true"></span></td>
           <td class="info-label">5. Branch</td>
-          <td colspan="2"><span class="underline-input" style="min-width:120px;" contenteditable="true"></span></td>
+          <td colspan="1"><span class="underline-input" style="min-width:120px; width:100%;" contenteditable="true"></span></td>
         </tr>
       </table>
 
@@ -398,7 +432,6 @@
             <td><label><input type="checkbox" class="pass-check"> </label></td>
             <td><label class="cross-label"><input type="checkbox" class="cross-checkbox"> </label></td>
           </tr>
-          <!-- d) 子项直接使用pass/fail栏 -->
           <tr>
             <td style="font-weight:500;">d) Heater Mounting</td>
             <td></td>
@@ -434,39 +467,64 @@
             <td><label><input type="checkbox" class="pass-check"> </label></td>
             <td><label class="cross-label"><input type="checkbox" class="cross-checkbox"> </label></td>
           </tr>
-          <!-- g) 无pass/fail -->
           <tr>
             <td style="font-weight:500;">g) Plug L&N Connection (When 3 Pin Facing You)</td>
             <td style="background:#f8f9fb;"></td>
             <td style="background:#f8f9fb;"></td>
           </tr>
           <tr>
-            <td colspan="3" style="padding: 8px;">
+            <td colspan="3" style="padding: 10px 8px;">
+              <!-- 严格按照文字描述布局：
+                   1. (Green/Yellow)  E checkbox
+                   2. 站的长方形 
+                   3. 横的长方形   横的长方形
+                   4. L checkbox  N checkbox
+                   5. (Brown/Red) (Blue/Black)
+                   注意：原描述中“1. (Green/Yellow)” 与E同行，“2. E checkbox”也在同一视觉行，
+                   我们实现为：第一行显示E站立长方形 + (Green/Yellow) + E checkbox。
+                   第二行：L横长方形 (Brown/Red) + L checkbox；N横长方形 (Blue/Black) + N checkbox。
+                   空格通过gap控制。 -->
               <div class="plug-diagram">
                 <div class="plug-pins-only">
-                  <!-- E 站立长方形 -->
+                  <!-- 第一排：E 站立长方形 + (Green/Yellow) + E checkbox -->
                   <div class="earth-row">
                     <div class="pin-item">
                       <div class="pin-box earth-pin-box"></div>
-                      <span class="pin-label">E (Green/Yellow)</span>
-                      <label class="pin-check-item"><input type="checkbox"></label>
+                      <span class="pin-label">(Green/Yellow)</span>
+                    </div>
+                    <div class="pin-check-item earth-check-wrapper">
+                      <label style="display:flex; align-items:center; gap:2px; font-size:12px; font-weight:500;">
+                        E <input type="checkbox">
+                      </label>
                     </div>
                   </div>
-                  <!-- L 和 N 横躺长方形 -->
+                  
+                  <!-- 第二排：两个横长方形，左侧L，右侧N，各自带checkbox -->
                   <div class="pin-row">
+                    <!-- L 部分 -->
                     <div class="pin-item">
                       <div class="pin-box live-neutral-box"></div>
-                      <span class="pin-label">L (Brown/Red)</span>
-                      <label class="pin-check-item"><input type="checkbox"></label>
+                      <span class="pin-label">(Brown/Red)</span>
+                      <div class="pin-check-item">
+                        <label style="display:flex; align-items:center; gap:2px; font-size:12px; font-weight:500;">
+                          L <input type="checkbox">
+                        </label>
+                      </div>
                     </div>
+                    <!-- N 部分 -->
                     <div class="pin-item">
                       <div class="pin-box live-neutral-box"></div>
-                      <span class="pin-label">N (Blue/Black)</span>
-                      <label class="pin-check-item"><input type="checkbox"></label>
+                      <span class="pin-label">(Blue/Black)</span>
+                      <div class="pin-check-item">
+                        <label style="display:flex; align-items:center; gap:2px; font-size:12px; font-weight:500;">
+                          N <input type="checkbox">
+                        </label>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+              <div style="font-size:10px; margin-top:4px; color:#2c3e50;">3-pin layout: E (vertical), L & N (horizontal)</div>
             </td>
           </tr>
           <tr>
