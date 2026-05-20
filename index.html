@@ -95,7 +95,7 @@
       text-transform: uppercase;
     }
 
-    /* 信息表格 - 平均分配宽度 */
+    /* 信息表格 - 恢复原来的样式 */
     .info-table {
       width: 100%;
       border-collapse: collapse;
@@ -104,10 +104,10 @@
       border: 1px solid #2c3e50;
     }
     .info-table td {
+      border: 1px solid #2c3e50;
       padding: 6px 8px;
       vertical-align: middle;
       background: white;
-      border: 1px solid #2c3e50;
     }
     .info-label {
       font-weight: 700;
@@ -117,6 +117,12 @@
       display: inline-block;
       min-width: 60px;
       border-bottom: 1.5px solid #333;
+      margin: 0 4px;
+      height: 1.4em;
+    }
+    .no-underline {
+      display: inline-block;
+      min-width: 60px;
       margin: 0 4px;
       height: 1.4em;
     }
@@ -227,38 +233,43 @@
       padding-left: 12px;
     }
 
-    /* 插头区域 - 黑白，指定布局 */
+    /* 插头区域 - 马来西亚3针三角形布局 */
     .plug-diagram {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 4px;
-      padding: 4px 0;
+      gap: 6px;
+      padding: 8px 0;
       margin-top: 2px;
     }
-    .earth-row {
+    .plug-top-row {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 2px;
     }
-    .earth-pin-wrapper {
+    .plug-top-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: black;
+    }
+    .plug-earth-row {
       display: flex;
       align-items: center;
       gap: 8px;
     }
-    .pin-row {
+    .plug-bottom-row {
       display: flex;
       gap: 30px;
       justify-content: center;
-      align-items: flex-end;
+      align-items: flex-start;
     }
-    .pin-item {
+    .plug-pin-group {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 4px;
+      gap: 2px;
     }
     .pin-box {
       background: #ddd;
@@ -272,17 +283,21 @@
       width: 32px;
       height: 14px;
     }
-    .pin-label {
-      font-size: 10px;
-      font-weight: 600;
+    .pin-letter {
+      font-size: 12px;
+      font-weight: 700;
       color: black;
-      text-align: center;
     }
     .pin-check-item {
       display: flex;
       align-items: center;
       gap: 3px;
-      font-size: 12px;
+    }
+    .pin-color-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: black;
+      text-align: center;
     }
 
     /* 签名区域 - 右下角 */
@@ -330,18 +345,18 @@
     <div class="page-content">
       <h1>Electrical Appliance QC Procedure & Form</h1>
       
-      <!-- 表格: 1,2,3 平均分三份 -->
+      <!-- 表格: 恢复原样式，2345去掉下划线 -->
       <table class="info-table">
         <tr>
           <td style="width:33.33%;"><span class="info-label">1. Made in HL?</span> 
             <span class="made-in-group"><label><input type="checkbox"> Yes</label> <label><input type="checkbox"> No</label></span>
           </td>
-          <td style="width:33.33%;"><span class="info-label">2. Sales Order No.</span> <span class="underline-input" contenteditable="true"></span></td>
-          <td style="width:33.33%;"><span class="info-label">3. Item No.</span> <span class="underline-input" contenteditable="true"></span></td>
+          <td style="width:33.33%;"><span class="info-label">2. Sales Order No.</span> <span class="no-underline" contenteditable="true"></span></td>
+          <td style="width:33.33%;"><span class="info-label">3. Item No.</span> <span class="no-underline" contenteditable="true"></span></td>
         </tr>
         <tr>
-          <td style="width:50%;"><span class="info-label">4. Customer Name</span> <span class="underline-input" style="min-width:140px;" contenteditable="true"></span></td>
-          <td style="width:50%;"><span class="info-label">5. Branch</span> <span class="underline-input" style="min-width:120px;" contenteditable="true"></span></td>
+          <td style="width:50%;"><span class="info-label">4. Customer Name</span> <span class="no-underline" contenteditable="true" style="min-width:140px;"></span></td>
+          <td style="width:50%;"><span class="info-label">5. Branch</span> <span class="no-underline" contenteditable="true" style="min-width:120px;"></span></td>
         </tr>
       </table>
 
@@ -422,35 +437,33 @@
             <td><label><input type="checkbox" class="pass-check"> </label></td>
             <td><label class="cross-label"><input type="checkbox" class="cross-checkbox"> </label></td>
           </tr>
-          <!-- g) 与插头图在同一个框内，非粗体 -->
+          <!-- g) 马来西亚3针插头三角形布局 -->
           <tr>
             <td colspan="3" style="padding: 8px; font-weight:500;">
               g) Plug L&N Connection (When 3 Pin Facing You)
               <div class="plug-diagram">
-                <div class="earth-row">
-                  <span class="pin-label">(Green/Yellow)</span>
-                  <div class="earth-pin-wrapper">
+                <!-- 顶部：地线 E (Green/Yellow) -->
+                <div class="plug-top-row">
+                  <span class="plug-top-label">(Green/Yellow)</span>
+                  <div class="plug-earth-row">
                     <div class="pin-box earth-pin-box"></div>
-                    <span class="pin-label">E</span>
+                    <span class="pin-letter">E</span>
                     <label class="pin-check-item"><input type="checkbox"></label>
                   </div>
                 </div>
-                <div class="pin-row">
-                  <div class="pin-item">
+                <!-- 底部：L (Brown/Red) 和 N (Blue/Black) -->
+                <div class="plug-bottom-row">
+                  <div class="plug-pin-group">
                     <div class="pin-box live-neutral-box"></div>
-                    <div class="pin-check-item">
-                      <span class="pin-label">L</span>
-                      <input type="checkbox">
-                    </div>
-                    <span class="pin-label">(Brown/Red)</span>
+                    <span class="pin-letter">L</span>
+                    <label class="pin-check-item"><input type="checkbox"></label>
+                    <span class="pin-color-label">(Brown/Red)</span>
                   </div>
-                  <div class="pin-item">
+                  <div class="plug-pin-group">
                     <div class="pin-box live-neutral-box"></div>
-                    <div class="pin-check-item">
-                      <span class="pin-label">N</span>
-                      <input type="checkbox">
-                    </div>
-                    <span class="pin-label">(Blue/Black)</span>
+                    <span class="pin-letter">N</span>
+                    <label class="pin-check-item"><input type="checkbox"></label>
+                    <span class="pin-color-label">(Blue/Black)</span>
                   </div>
                 </div>
               </div>
