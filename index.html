@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=1.5">
   <title>Electrical Appliance QC Procedure & Form</title>
   <style>
     * {
@@ -114,12 +114,17 @@
       white-space: nowrap;
       width: 1%;
     }
-    .underline-input {
+    /* 移除下划线，改为空白但保留宽度 */
+    .info-input {
       display: inline-block;
       min-width: 70px;
-      border-bottom: 1.5px solid #333;
+      border-bottom: none;          /* 去掉下划线 */
       margin: 0 4px;
       height: 1.4em;
+      vertical-align: middle;
+      background: transparent;
+      outline: none;
+      padding: 0 2px;
     }
     .made-in-group {
       display: flex;
@@ -230,7 +235,15 @@
       padding-left: 12px;
     }
 
-    /* 插头区域 - 黑白，横躺长方形L/N，站立E */
+    /* 插头区域 - 合并后样式，g) 和 3pin 图融为一体 */
+    .merged-plug-cell {
+      padding: 6px 8px;
+    }
+    .plug-g-title {
+      font-weight: 500;
+      margin-bottom: 8px;
+      font-size: 12.5px;
+    }
     .plug-diagram {
       display: flex;
       align-items: flex-start;
@@ -238,6 +251,7 @@
       gap: 0;
       padding: 4px 0;
       margin-top: 2px;
+      flex-wrap: wrap;
     }
     .plug-pins-only {
       display: flex;
@@ -322,6 +336,16 @@
       margin-top: 6px;
       text-align: right;
     }
+
+    /* 保证表格宽度不变，内部元素自适应 */
+    .info-table td, .checklist-table td {
+      transition: none;
+    }
+    .info-input:empty::before {
+      content: attr(data-placeholder);
+      color: #aaa;
+      font-style: italic;
+    }
   </style>
 </head>
 <body>
@@ -333,7 +357,7 @@
     <div class="page-content">
       <h1>Electrical Appliance QC Procedure & Form</h1>
       
-      <!-- 表格: 1,2,3 第一排；4,5 第二排 -->
+      <!-- 表格: 1,2,3 第一排；4,5 第二排 (答案格无下划线，宽度保持) -->
       <table class="info-table">
         <tr>
           <td class="info-label">1. Made in HL?</td>
@@ -344,15 +368,15 @@
             </span>
           </td>
           <td class="info-label">2. Sales Order No.</td>
-          <td><span class="underline-input" contenteditable="true"></span></td>
+          <td><span class="info-input" contenteditable="true" data-placeholder=""></span></td>
           <td class="info-label">3. Item No.</td>
-          <td><span class="underline-input" contenteditable="true"></span></td>
+          <td><span class="info-input" contenteditable="true" data-placeholder=""></span></td>
         </tr>
         <tr>
           <td class="info-label">4. Customer Name</td>
-          <td colspan="2"><span class="underline-input" style="min-width:180px;" contenteditable="true"></span></td>
+          <td colspan="2"><span class="info-input" style="min-width:180px;" contenteditable="true" data-placeholder=""></span></td>
           <td class="info-label">5. Branch</td>
-          <td colspan="2"><span class="underline-input" style="min-width:120px;" contenteditable="true"></span></td>
+          <td colspan="2"><span class="info-input" style="min-width:120px;" contenteditable="true" data-placeholder=""></span></td>
         </tr>
       </table>
 
@@ -377,7 +401,7 @@
         </div>
       </div>
 
-      <!-- 7. 检查表 -->
+      <!-- 7. 检查表 (g项与3pin图合并) -->
       <table class="checklist-table">
         <thead>
            <tr><th class="procedure-col">7. Procedure / Check Item</th><th class="check-col">✓ Pass</th><th class="cross-col">✗ Fail</th></tr>
@@ -434,14 +458,10 @@
             <td><label><input type="checkbox" class="pass-check"> </label></td>
             <td><label class="cross-label"><input type="checkbox" class="cross-checkbox"> </label></td>
           </tr>
-          <!-- g) 无pass/fail -->
+          <!-- g) 与下方3pin图合并：标题+插头图放在同一单元格，占据整行 -->
           <tr>
-            <td style="font-weight:500;">g) Plug L&N Connection (When 3 Pin Facing You)</td>
-            <td style="background:#f8f9fb;"></td>
-            <td style="background:#f8f9fb;"></td>
-          </tr>
-          <tr>
-            <td colspan="3" style="padding: 8px;">
+            <td colspan="3" class="merged-plug-cell">
+              <div class="plug-g-title">g) Plug L&N Connection (When 3 Pin Facing You)</div>
               <div class="plug-diagram">
                 <div class="plug-pins-only">
                   <!-- E 站立长方形 -->
@@ -465,6 +485,10 @@
                       <label class="pin-check-item"><input type="checkbox"></label>
                     </div>
                   </div>
+                </div>
+                <!-- 可选：右侧保留勾选提示，保持视觉平衡 -->
+                <div class="check-pins" style="margin-left:20px;">
+                  <div style="font-size:11px; color:#2c3e50;">✓ Check each pin</div>
                 </div>
               </div>
             </td>
