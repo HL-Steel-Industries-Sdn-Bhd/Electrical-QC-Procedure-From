@@ -114,11 +114,11 @@
       white-space: nowrap;
       width: 1%;
     }
-    /* 移除下划线，改为空白但保留宽度 */
+    /* 答案格：无下划线，宽度保持 */
     .info-input {
       display: inline-block;
       min-width: 70px;
-      border-bottom: none;          /* 去掉下划线 */
+      border-bottom: none;
       margin: 0 4px;
       height: 1.4em;
       vertical-align: middle;
@@ -235,7 +235,7 @@
       padding-left: 12px;
     }
 
-    /* 插头区域 - 合并后样式，g) 和 3pin 图融为一体 */
+    /* 插头区域 - 合并后样式 */
     .merged-plug-cell {
       padding: 6px 8px;
     }
@@ -337,10 +337,6 @@
       text-align: right;
     }
 
-    /* 保证表格宽度不变，内部元素自适应 */
-    .info-table td, .checklist-table td {
-      transition: none;
-    }
     .info-input:empty::before {
       content: attr(data-placeholder);
       color: #aaa;
@@ -401,7 +397,7 @@
         </div>
       </div>
 
-      <!-- 7. 检查表 (g项与3pin图合并) -->
+      <!-- 7. 检查表 (g项与3pin图合并，L脚复选框与长方形交换位置) -->
       <table class="checklist-table">
         <thead>
            <tr><th class="procedure-col">7. Procedure / Check Item</th><th class="check-col">✓ Pass</th><th class="cross-col">✗ Fail</th></tr>
@@ -458,7 +454,7 @@
             <td><label><input type="checkbox" class="pass-check"> </label></td>
             <td><label class="cross-label"><input type="checkbox" class="cross-checkbox"> </label></td>
           </tr>
-          <!-- g) 与下方3pin图合并：标题+插头图放在同一单元格，占据整行 -->
+          <!-- g) 合并单元格：标题 + 3pin图，L脚复选框与长方形互换，移除多余文字 -->
           <tr>
             <td colspan="3" class="merged-plug-cell">
               <div class="plug-g-title">g) Plug L&N Connection (When 3 Pin Facing You)</div>
@@ -472,12 +468,13 @@
                       <label class="pin-check-item"><input type="checkbox"></label>
                     </div>
                   </div>
-                  <!-- L 和 N 横躺长方形 -->
+                  <!-- L 和 N 横躺长方形，L脚：复选框移到长方形左侧 -->
                   <div class="pin-row">
                     <div class="pin-item">
+                      <!-- L 脚：复选框在前，长方形在后 -->
+                      <label class="pin-check-item"><input type="checkbox"></label>
                       <div class="pin-box live-neutral-box"></div>
                       <span class="pin-label">L (Brown/Red)</span>
-                      <label class="pin-check-item"><input type="checkbox"></label>
                     </div>
                     <div class="pin-item">
                       <div class="pin-box live-neutral-box"></div>
@@ -485,10 +482,6 @@
                       <label class="pin-check-item"><input type="checkbox"></label>
                     </div>
                   </div>
-                </div>
-                <!-- 可选：右侧保留勾选提示，保持视觉平衡 -->
-                <div class="check-pins" style="margin-left:20px;">
-                  <div style="font-size:11px; color:#2c3e50;">✓ Check each pin</div>
                 </div>
               </div>
             </td>
