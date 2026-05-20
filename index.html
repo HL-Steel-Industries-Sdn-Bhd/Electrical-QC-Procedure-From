@@ -95,7 +95,7 @@
       text-transform: uppercase;
     }
 
-    /* 信息表格 */
+    /* 信息表格 - 平均分配宽度 */
     .info-table {
       width: 100%;
       border-collapse: collapse;
@@ -104,19 +104,18 @@
       border: 1px solid #2c3e50;
     }
     .info-table td {
-      border: 1px solid #2c3e50;
       padding: 6px 8px;
       vertical-align: middle;
       background: white;
+      border: 1px solid #2c3e50;
     }
     .info-label {
       font-weight: 700;
       white-space: nowrap;
-      width: 1%;
     }
     .underline-input {
       display: inline-block;
-      min-width: 70px;
+      min-width: 60px;
       border-bottom: 1.5px solid #333;
       margin: 0 4px;
       height: 1.4em;
@@ -190,7 +189,6 @@
     }
     .procedure-col {
       width: 58%;
-      font-weight: 500;
     }
     .check-col {
       width: 21%;
@@ -221,7 +219,6 @@
       font-weight: 600;
     }
 
-    /* d) 子项使用pass/fail栏 */
     .sub-item-row td {
       padding: 3px 6px;
       font-size: 12px;
@@ -230,90 +227,90 @@
       padding-left: 12px;
     }
 
-    /* 插头区域 - 黑白，横躺长方形L/N，站立E */
+    /* 插头区域 - 黑白，指定布局 */
     .plug-diagram {
-      display: flex;
-      align-items: flex-start;
-      justify-content: flex-start;
-      gap: 0;
-      padding: 4px 0;
-      margin-top: 2px;
-    }
-    .plug-pins-only {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 6px;
-      position: relative;
+      justify-content: center;
+      gap: 4px;
+      padding: 4px 0;
+      margin-top: 2px;
     }
     .earth-row {
       display: flex;
-      justify-content: center;
-      margin-bottom: 2px;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+    .earth-pin-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
     .pin-row {
       display: flex;
-      gap: 18px;
+      gap: 30px;
       justify-content: center;
       align-items: flex-end;
     }
     .pin-item {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 8px;
+      gap: 4px;
     }
     .pin-box {
       background: #ddd;
       border: 1.5px solid #1a1a1a;
     }
     .earth-pin-box {
-      width: 12px;
-      height: 28px;
+      width: 14px;
+      height: 32px;
     }
     .live-neutral-box {
-      width: 28px;
-      height: 12px;
+      width: 32px;
+      height: 14px;
     }
     .pin-label {
-      font-size: 11px;
-      font-weight: 700;
+      font-size: 10px;
+      font-weight: 600;
       color: black;
-    }
-    .check-pins {
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-      margin-left: 12px;
+      text-align: center;
     }
     .pin-check-item {
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 3px;
       font-size: 12px;
-      font-weight: 500;
     }
 
-    .signature-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-      border: 1px solid #2c3e50;
+    /* 签名区域 - 右下角 */
+    .signature-area {
+      display: flex;
+      justify-content: flex-end;
+      gap: 28px;
+      margin-top: 8px;
+      padding-right: 10px;
     }
-    .signature-table td {
+    .sign-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
       border: 1px solid #2c3e50;
-      padding: 8px 10px;
-      vertical-align: middle;
-      font-weight: 700;
-      font-size: 13px;
-      color: #1e3b5a;
+      padding: 6px 12px;
       background: white;
     }
-    .sign-line-box {
-      display: inline-block;
-      min-width: 130px;
+    .sign-label {
+      font-weight: 700;
+      font-size: 12px;
+      color: #1e3b5a;
+    }
+    .sign-line {
+      width: 110px;
       border-bottom: 1.5px solid #1e2b38;
-      margin-left: 12px;
-      height: 1.4em;
+      margin-top: 4px;
     }
 
     .footer-note {
@@ -333,26 +330,18 @@
     <div class="page-content">
       <h1>Electrical Appliance QC Procedure & Form</h1>
       
-      <!-- 表格: 1,2,3 第一排；4,5 第二排 -->
+      <!-- 表格: 1,2,3 平均分三份 -->
       <table class="info-table">
         <tr>
-          <td class="info-label">1. Made in HL?</td>
-          <td>
-            <span class="made-in-group">
-              <label><input type="checkbox"> Yes</label>
-              <label><input type="checkbox"> No</label>
-            </span>
+          <td style="width:33.33%;"><span class="info-label">1. Made in HL?</span> 
+            <span class="made-in-group"><label><input type="checkbox"> Yes</label> <label><input type="checkbox"> No</label></span>
           </td>
-          <td class="info-label">2. Sales Order No.</td>
-          <td><span class="underline-input" contenteditable="true"></span></td>
-          <td class="info-label">3. Item No.</td>
-          <td><span class="underline-input" contenteditable="true"></span></td>
+          <td style="width:33.33%;"><span class="info-label">2. Sales Order No.</span> <span class="underline-input" contenteditable="true"></span></td>
+          <td style="width:33.33%;"><span class="info-label">3. Item No.</span> <span class="underline-input" contenteditable="true"></span></td>
         </tr>
         <tr>
-          <td class="info-label">4. Customer Name</td>
-          <td colspan="2"><span class="underline-input" style="min-width:180px;" contenteditable="true"></span></td>
-          <td class="info-label">5. Branch</td>
-          <td colspan="2"><span class="underline-input" style="min-width:120px;" contenteditable="true"></span></td>
+          <td style="width:50%;"><span class="info-label">4. Customer Name</span> <span class="underline-input" style="min-width:140px;" contenteditable="true"></span></td>
+          <td style="width:50%;"><span class="info-label">5. Branch</span> <span class="underline-input" style="min-width:120px;" contenteditable="true"></span></td>
         </tr>
       </table>
 
@@ -398,7 +387,6 @@
             <td><label><input type="checkbox" class="pass-check"> </label></td>
             <td><label class="cross-label"><input type="checkbox" class="cross-checkbox"> </label></td>
           </tr>
-          <!-- d) 子项直接使用pass/fail栏 -->
           <tr>
             <td style="font-weight:500;">d) Heater Mounting</td>
             <td></td>
@@ -434,36 +422,35 @@
             <td><label><input type="checkbox" class="pass-check"> </label></td>
             <td><label class="cross-label"><input type="checkbox" class="cross-checkbox"> </label></td>
           </tr>
-          <!-- g) 无pass/fail -->
+          <!-- g) 与插头图在同一个框内，非粗体 -->
           <tr>
-            <td style="font-weight:500;">g) Plug L&N Connection (When 3 Pin Facing You)</td>
-            <td style="background:#f8f9fb;"></td>
-            <td style="background:#f8f9fb;"></td>
-          </tr>
-          <tr>
-            <td colspan="3" style="padding: 8px;">
+            <td colspan="3" style="padding: 8px; font-weight:500;">
+              g) Plug L&N Connection (When 3 Pin Facing You)
               <div class="plug-diagram">
-                <div class="plug-pins-only">
-                  <!-- E 站立长方形 -->
-                  <div class="earth-row">
-                    <div class="pin-item">
-                      <div class="pin-box earth-pin-box"></div>
-                      <span class="pin-label">E (Green/Yellow)</span>
-                      <label class="pin-check-item"><input type="checkbox"></label>
-                    </div>
+                <div class="earth-row">
+                  <span class="pin-label">(Green/Yellow)</span>
+                  <div class="earth-pin-wrapper">
+                    <div class="pin-box earth-pin-box"></div>
+                    <span class="pin-label">E</span>
+                    <label class="pin-check-item"><input type="checkbox"></label>
                   </div>
-                  <!-- L 和 N 横躺长方形 -->
-                  <div class="pin-row">
-                    <div class="pin-item">
-                      <div class="pin-box live-neutral-box"></div>
-                      <span class="pin-label">L (Brown/Red)</span>
-                      <label class="pin-check-item"><input type="checkbox"></label>
+                </div>
+                <div class="pin-row">
+                  <div class="pin-item">
+                    <div class="pin-box live-neutral-box"></div>
+                    <div class="pin-check-item">
+                      <span class="pin-label">L</span>
+                      <input type="checkbox">
                     </div>
-                    <div class="pin-item">
-                      <div class="pin-box live-neutral-box"></div>
-                      <span class="pin-label">N (Blue/Black)</span>
-                      <label class="pin-check-item"><input type="checkbox"></label>
+                    <span class="pin-label">(Brown/Red)</span>
+                  </div>
+                  <div class="pin-item">
+                    <div class="pin-box live-neutral-box"></div>
+                    <div class="pin-check-item">
+                      <span class="pin-label">N</span>
+                      <input type="checkbox">
                     </div>
+                    <span class="pin-label">(Blue/Black)</span>
                   </div>
                 </div>
               </div>
@@ -477,13 +464,17 @@
         </tbody>
       </table>
 
-      <!-- 签名表格 -->
-      <table class="signature-table">
-        <tr>
-          <td style="width:50%;">a) Checked by <span class="sign-line-box" contenteditable="true"></span></td>
-          <td style="width:50%;">b) Verified by <span class="sign-line-box" contenteditable="true"></span></td>
-        </tr>
-      </table>
+      <!-- 右下角签名框 -->
+      <div class="signature-area">
+        <div class="sign-box">
+          <span class="sign-label">a) Checked by</span>
+          <div class="sign-line" contenteditable="true"></div>
+        </div>
+        <div class="sign-box">
+          <span class="sign-label">b) Verified by</span>
+          <div class="sign-line" contenteditable="true"></div>
+        </div>
+      </div>
       
       <div class="footer-note">QC-ELEC-FRM-001</div>
     </div>
