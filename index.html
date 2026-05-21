@@ -217,8 +217,34 @@
       cursor: pointer;
       margin: 0;
     }
+    /* 自定义 fail 复选框样式：隐藏原生，用伪元素显示 ✗ */
     .cross-checkbox {
-      accent-color: #a12b2b !important;
+      appearance: none;
+      -webkit-appearance: none;
+      width: 15px;
+      height: 15px;
+      border: 1.5px solid #a12b2b;
+      border-radius: 2px;
+      background: white;
+      cursor: pointer;
+      position: relative;
+      margin: 0;
+      accent-color: transparent;
+    }
+    .cross-checkbox:checked {
+      background: #a12b2b;
+      border-color: #a12b2b;
+    }
+    .cross-checkbox:checked::after {
+      content: "✗";
+      color: white;
+      font-size: 13px;
+      font-weight: bold;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      line-height: 1;
     }
     .cross-label {
       color: #a12b2b;
@@ -443,7 +469,7 @@
             <td><label><input type="checkbox" class="pass-check"> </label></td>
             <td><label class="cross-label"><input type="checkbox" class="cross-checkbox"> </label></td>
           </tr>
-          <!-- g) E脚和N脚：文字与复选框对调 -->
+          <!-- g) 合并 -->
           <tr>
             <td colspan="3" class="merged-plug-cell">
               <div class="plug-g-title">g) Plug L&N Connection (When 3 Pin Facing You)</div>
@@ -452,7 +478,6 @@
                   <div class="earth-row">
                     <div class="pin-item">
                       <div class="pin-box earth-pin-box"></div>
-                      <!-- E脚：复选框在前，文字在后 -->
                       <label class="pin-check-item"><input type="checkbox"></label>
                       <span class="pin-label">E (Green/Yellow)</span>
                     </div>
@@ -465,7 +490,6 @@
                     </div>
                     <div class="pin-item">
                       <div class="pin-box live-neutral-box"></div>
-                      <!-- N脚：复选框在前，文字在后 -->
                       <label class="pin-check-item"><input type="checkbox"></label>
                       <span class="pin-label">N (Blue/Black)</span>
                     </div>
