@@ -262,8 +262,7 @@
       display: flex;
       justify-content: flex-start;
       margin-bottom: 2px;
-      /* 12 + 8 = 20 个字母宽度 */
-      padding-left: 12em;
+      padding-left: 11.1em;
     }
     .pin-row {
       display: flex;
@@ -444,7 +443,7 @@
             <td><label><input type="checkbox" class="pass-check"> </label></td>
             <td><label class="cross-label"><input type="checkbox" class="cross-checkbox"> </label></td>
           </tr>
-          <!-- g) 合并：E脚整行向右偏移约20个字母距离 (12+8) -->
+          <!-- g) E脚和N脚：文字与复选框对调 -->
           <tr>
             <td colspan="3" class="merged-plug-cell">
               <div class="plug-g-title">g) Plug L&N Connection (When 3 Pin Facing You)</div>
@@ -453,8 +452,9 @@
                   <div class="earth-row">
                     <div class="pin-item">
                       <div class="pin-box earth-pin-box"></div>
-                      <span class="pin-label">E (Green/Yellow)</span>
+                      <!-- E脚：复选框在前，文字在后 -->
                       <label class="pin-check-item"><input type="checkbox"></label>
+                      <span class="pin-label">E (Green/Yellow)</span>
                     </div>
                   </div>
                   <div class="pin-row">
@@ -465,8 +465,9 @@
                     </div>
                     <div class="pin-item">
                       <div class="pin-box live-neutral-box"></div>
-                      <span class="pin-label">N (Blue/Black)</span>
+                      <!-- N脚：复选框在前，文字在后 -->
                       <label class="pin-check-item"><input type="checkbox"></label>
+                      <span class="pin-label">N (Blue/Black)</span>
                     </div>
                   </div>
                 </div>
